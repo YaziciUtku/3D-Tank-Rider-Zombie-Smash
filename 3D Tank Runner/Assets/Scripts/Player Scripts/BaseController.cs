@@ -8,7 +8,7 @@ public class BaseController : MonoBehaviour
     protected float maxAngle = 10f;
 
     public Vector3 speed;
-    public float x_Speed = 8f, z_Speed = 15f;
+    public float x_Speed = 8f, z_Speed = 12f;
     public float accelerated = 15f, deccalerated = 10f;
     public float low_Sound_Pitch, normal_Sound_Pitch, high_Sound_Pitch;
     public AudioClip engine_On_Sound, engine_Off_Sound;
@@ -18,12 +18,13 @@ public class BaseController : MonoBehaviour
     private void OnEnable()
     {
         speed = new Vector3(0, 0, z_Speed);
+        soundManager = GetComponent<AudioSource>();
     }
 
     private void Awake()
     {
-        //speed = new Vector3(0, 0, z_Speed);
-        soundManager = GetComponent<AudioSource>();
+        speed = new Vector3(0, 0, z_Speed);
+        
     }
 
     protected void MoveLeft()
