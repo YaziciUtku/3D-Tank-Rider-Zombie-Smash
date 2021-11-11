@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5252184140478643296}
   - component: {fileID: 5252184140479610528}
   - component: {fileID: 5252184140953750537}
+  - component: {fileID: 2027204324241424905}
   m_Layer: 0
   m_Name: Sand Bags
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,3 +96,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.688282, y: 1.4293243, z: 1.9924493}
   m_Center: {x: 0, y: 0.71466213, z: -0.56166816}
+--- !u!114 &2027204324241424905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5252184140477407328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89341204102d64fa7bbd92b13234dfbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 1242859992640132, guid: a30f4231b59ac4cac82b2b2931f7a678, type: 3}
+  damage: 20

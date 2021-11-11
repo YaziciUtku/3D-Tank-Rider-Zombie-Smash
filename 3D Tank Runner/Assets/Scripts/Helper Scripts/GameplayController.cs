@@ -46,12 +46,12 @@ public class GameplayController : MonoBehaviour
         float timer = Random.Range(min_ObstacleDelay, max_obstacleDelay) / playerController.speed.z;
         yield return new WaitForSeconds(timer);
 
-        CreatObstacles(playerController.gameObject.transform.position.z + halfGroundSize);
+        CreateObstacles(playerController.gameObject.transform.position.z + halfGroundSize);
 
         StartCoroutine("GenerateObstacles");
     }
 
-    void CreatObstacles(float zPos)
+    void CreateObstacles(float zPos)
     {
         int r = Random.Range(0, 10);
         if(r >= 0 && r < 7)
@@ -74,7 +74,7 @@ public class GameplayController : MonoBehaviour
                 zombieLane = Random.Range(0, 2) == 1 ? 1 : 0;
             }
 
-            AddZombies(new Vector3(lanes[zombieLane].transform.position.x, 0.15f, zPos));
+            AddZombies(new Vector3(lanes[zombieLane].transform.position.x, 0.15f, zPos), Random.Range(0, zombiePrefabs.Length));
         }
 
     }
@@ -105,14 +105,14 @@ public class GameplayController : MonoBehaviour
         obstacle.transform.position = position;
     }
 
-    void AddZombies(Vector3 pos)
+    void AddZombies(Vector3 pos, int ztype)
     {
         int count = Random.Range(0, 3) + 1;
 
         for(int i = 0; i<count; i++)
         {
-            Vector3 shift = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(0, 10) * i);
-            Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], pos + shift * i, Quaternion.identity);
+            Vector3 shift = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(0, 10) * i );
+            Instantiate(zombiePrefabs[ztype], pos + shift * i, Quaternion.identity);
         }
     }
 
