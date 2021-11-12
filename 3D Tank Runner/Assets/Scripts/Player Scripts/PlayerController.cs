@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class PlayerController : BaseController
 {
     private Rigidbody playerRB;
@@ -10,14 +11,27 @@ public class PlayerController : BaseController
     public Transform bulletFirePosition;
     public ParticleSystem shootFX;
     private Animator shootSliderAnim;
+    private Button shootButton;
+    private float reloadTime;
+    
+
+    [HideInInspector]
+    public bool canShoot;
+
     private void Awake()
     {
          playerRB = GetComponent<Rigidbody>();
+        shootSliderAnim = GameObject.Find("Fire Bar").GetComponent<Animator>();
+        shootButton = GameObject.Find("ShootButton").GetComponent<Button>();
+        shootButton.onClick.AddListener(ShootBullet);
+        
     }
 
     void Start()
     {
         playerRB.rotation = startRotation;
+        canShoot = true;
+        reloadTime = 2f;
     }
        
     void Update()
@@ -100,11 +114,26 @@ public class PlayerController : BaseController
 
     public void ShootBullet()
     {
+        if (Time.timeScale != 0)
+        {
+            if (canShoot)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, bulletFirePosition.position, Quaternion.identity);
+                bullet.GetComponent<BulletScript>().Move(2000f);
+                shootFX.Play();
+
+                shootSliderAnim.Play("ShotFired");
+                canShoot = false;
+                StartCoroutine(WaitForShootAgain(reloadTime));
+            }
+        }
         
-            GameObject bullet = Instantiate(bulletPrefab, bulletFirePosition.position, Quaternion.identity);
-            bullet.GetComponent<BulletScript>().Move(2000f);
-            shootFX.Play();
-        
+    }
+
+    IEnumerator WaitForShootAgain(float reload)
+    {
+        yield return new WaitForSeconds(reload);
+        canShoot = true;
     }
 
    
