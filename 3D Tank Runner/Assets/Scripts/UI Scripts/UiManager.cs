@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
 {
     private bool isPaused;
     public GameObject pausePanel;
+    
 
     void Start()
     {

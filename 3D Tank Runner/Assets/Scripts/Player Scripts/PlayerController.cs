@@ -7,9 +7,10 @@ public class PlayerController : BaseController
 {
     private Rigidbody playerRB;
     private Quaternion startRotation =Quaternion.Euler(0,0,0);
-    public GameObject bulletPrefab;
+    //public GameObject bulletPrefab;
     public Transform bulletFirePosition;
     public ParticleSystem shootFX;
+    public Character characterData;
     private Animator shootSliderAnim;
     private Button shootButton;
     private float reloadTime;
@@ -118,7 +119,7 @@ public class PlayerController : BaseController
         {
             if (canShoot)
             {
-                GameObject bullet = Instantiate(bulletPrefab, bulletFirePosition.position, Quaternion.identity);
+                GameObject bullet = Instantiate(characterData.bulletPrefab, bulletFirePosition.position, Quaternion.identity);
                 bullet.GetComponent<BulletScript>().Move(2000f);
                 shootFX.Play();
 
