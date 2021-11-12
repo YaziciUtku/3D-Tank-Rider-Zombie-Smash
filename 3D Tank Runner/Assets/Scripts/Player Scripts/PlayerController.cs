@@ -9,6 +9,7 @@ public class PlayerController : BaseController
     public GameObject bulletPrefab;
     public Transform bulletFirePosition;
     public ParticleSystem shootFX;
+    private Animator shootSliderAnim;
     private void Awake()
     {
          playerRB = GetComponent<Rigidbody>();
@@ -21,7 +22,7 @@ public class PlayerController : BaseController
        
     void Update()
     {
-        ShootBullet();
+      
         ControlMovementWithKeyboard();
         ChangeRotation();
     }
@@ -99,12 +100,11 @@ public class PlayerController : BaseController
 
     public void ShootBullet()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
+        
             GameObject bullet = Instantiate(bulletPrefab, bulletFirePosition.position, Quaternion.identity);
             bullet.GetComponent<BulletScript>().Move(2000f);
             shootFX.Play();
-        }
+        
     }
 
    
